@@ -1,0 +1,50 @@
+<html>
+<head>
+<!-- <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/css/bootstrap.min.css" rel="stylesheet"> -->
+<link href="css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body bgcolor="#FFD700">
+<table id="sampleTableA" border="2px" class="table table-striped sampleTable">
+<thead>
+					<tr>
+						<th>Title</th>
+						<th>Name</th>
+						<th>Age</th>
+						<th>Favourite Flag</th>
+						<th>Contact Count</th>
+						<th>Contact Details</th>
+					</tr>
+				</thead>
+<tbody>
+ <%
+ //console.log(result);
+               for (var j = 0; j < result.length; j++){
+			//console.log(result[j].userid);
+			var today = new Date(); 
+			var dob = result[j].birthdate;
+			var favFlag = result[j].isfavorite;
+			%>
+			<tr style='width:80%;border-color:red;border-style:solid;border-width:3px'>
+			<td style='width:10%;'><%= result[j].title %></td>
+			<td style='width:10%;'><%= result[j].NAME %></td>
+			<td style='width:10%;'><%= today.getFullYear() - dob.substring(0, 4) %></td>
+			<td style='width:10%;'><%= (favFlag === 0 ? "false" : "true") %></td>
+			<td style='width:10%;'><%= result[j].count %></td>
+			<td style='width:10%;'><a href='/contactDetails?id=<%= result[j].userid %>' >Contact Details</a></td>
+			</tr>
+	<% 	 }  %>
+</tbody>
+</table>
+		<script src="/js/jquery.min.js"></script>
+		<script src="/js/bootstrap.min.js"></script>
+		<script src="/js/fancyTable.min.js"></script>
+<script>
+$("#sampleTableA").fancyTable({
+					sortColumn:0,
+					pagination: true,
+					perPage:20,
+					globalSearch:true
+});
+</script>
+</body>
+</hmtl>
